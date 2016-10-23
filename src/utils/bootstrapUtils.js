@@ -5,6 +5,10 @@ import { PropTypes } from 'react';
 
 import { SIZE_MAP } from './StyleConfig';
 
+/*
+  if a component is supplied(as the last argument) execute the function
+  return a decorator waiting to be called with a component.
+*/
 function curry(fn) {
   return (...args) => {
     let last = args[args.length - 1];
@@ -15,7 +19,12 @@ function curry(fn) {
   };
 }
 
+/*
+  Prefix the bsClass props of the component with the variant
+  Using the Invariant function to throw error if bsClass is not defined.
+*/
 export function prefix(props, variant) {
+  // A component called with this function must have a bsClass.
   invariant(
     props.bsClass != null,
     'A `bsClass` prop is required for this component'
@@ -33,6 +42,10 @@ export const bsClass = curry((defaultClass, Component) => {
   return Component;
 });
 
+/*
+  Set a `oneOf propTypes` for Component's bsStyle propTypes
+  and defualtStyle if provided
+*/
 export const bsStyles = curry((styles, defaultStyle, Component) => {
   if (typeof defaultStyle !== 'string') {
     Component = defaultStyle;
@@ -66,6 +79,7 @@ export const bsStyles = curry((styles, defaultStyle, Component) => {
   return Component;
 });
 
+// Same as bsStyle except for Sizes. Uses the SIZE_MAP to convert size to their short form
 export const bsSizes = curry((sizes, defaultSize, Component) => {
   if (typeof defaultSize !== 'string') {
     Component = defaultSize;
@@ -112,9 +126,13 @@ export const bsSizes = curry((sizes, defaultSize, Component) => {
   return Component;
 });
 
+/*
+  create classes for bsStyle and bsSize by prefixing them with the bsClass
+  then return all the classes as objects
+*/
 export function getClassSet(props) {
   const classes = {
-    [prefix(props)]: true,
+    [prefix(props)]: true, // the square bracket causes the execution.
   };
 
   if (props.bsSize) {
