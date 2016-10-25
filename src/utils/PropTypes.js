@@ -4,10 +4,14 @@ import createChainableTypeChecker
 import ValidComponentChildren from './ValidComponentChildren';
 
 export function requiredRoles(...roles) {
+  /*
+    The createChainableTypeChecker attach a isRequired function to the function
+    passed to it. If isRequired throws error. returns the function.
+  */
   return createChainableTypeChecker((props, propName, component) => {
     let missing;
 
-    roles.every(role => {
+    roles.every(role => { // .every beats .forEach here because execution stops immediately there is false.
       if (!ValidComponentChildren.some(
         props.children, child => child.props.bsRole === role
       )) {
