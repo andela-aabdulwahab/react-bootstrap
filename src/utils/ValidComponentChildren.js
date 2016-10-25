@@ -141,6 +141,12 @@ function some(children, func, context) {
   let index = 0;
   let result = false;
 
+  /*
+    using React.Children.forEach to
+    deal with the opaque data structure of props.children. It's not an actual
+    array. typeof children returns 'object'
+  */
+
   React.Children.forEach(children, child => {
     if (result) {
       return;
@@ -149,8 +155,10 @@ function some(children, func, context) {
       return;
     }
 
+
+    //  Runs through every child to see it there is any that can change the function to true
     if (func.call(context, child, index++)) {
-      result = true;
+      result = true; // as long as one of the child passes, result is set to true.
     }
   });
 
