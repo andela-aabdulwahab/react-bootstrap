@@ -48,7 +48,7 @@ class PanelGroup extends React.Component {
   render() {
     const {
       accordion,
-      activeKey: propsActiveKey,
+      activeKey: propsActiveKey, // can't find use for this since line 63
       className,
       children,
       ...props
