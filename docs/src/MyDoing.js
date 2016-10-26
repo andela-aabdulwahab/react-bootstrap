@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormControl, ControlLabel, FormGroup, HelpBlock } from '../../src/index';
+import { Form, FormControl, ControlLabel, FormGroup, HelpBlock, Grid, Row } from '../../src/index';
 
 
 class FormExample extends Component {
@@ -25,8 +25,6 @@ class FormExample extends Component {
     this.setState({
       [event.target.id]: event.target.value
     });
-
-
   }
 
   render() {
@@ -37,11 +35,11 @@ class FormExample extends Component {
           <ControlLabel>Working example with validation</ControlLabel>
           <FormControl
             type="text"
-            value={this.state.search.facebook_id}
+            value={this.state.facebook_id}
             placeholder="Enter text"
             onChange={this.handleChange} />
           <FormControl.Feedback />
-          <HelpBlock>{this.state.search.facebook_id}</HelpBlock>
+          <HelpBlock>{this.state.facebook_id}</HelpBlock>
         </FormGroup>
 
         <FormGroup
@@ -49,15 +47,27 @@ class FormExample extends Component {
           <ControlLabel>Working example with validation</ControlLabel>
           <FormControl
             type="text"
-            value={this.state.search.facebook_email}
+            value={this.state.facebook_email}
             placeholder="Enter text"
             onChange={this.handleChange} />
           <FormControl.Feedback />
-          <HelpBlock>{this.state.search.facebook_email}</HelpBlock>
+          <HelpBlock>{this.state.facebook_email}</HelpBlock>
         </FormGroup>
       </Form>
     );
   }
 }
 
-export default FormExample;
+class MyDoing extends Component {
+  render() {
+    return(
+      <Grid>
+        <Row className="show-grid" >
+          <FormExample />
+        </Row>
+      </Grid>
+    )
+  }
+}
+
+export default MyDoing;
