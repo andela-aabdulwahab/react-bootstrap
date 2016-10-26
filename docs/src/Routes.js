@@ -8,6 +8,7 @@ import IntroductionPage from './IntroductionPage';
 import NotFoundPage from './NotFoundPage';
 import Root from './Root';
 import SupportPage from './SupportPage';
+import MyDoing from './MyDoing';
 
 export default (
   <Route path="/" component={Root}>
@@ -16,6 +17,7 @@ export default (
     <Route path="getting-started.html" component={GettingStartedPage} />
     <Route path="components.html" component={ComponentsPage} />
     <Route path="support.html" component={SupportPage} />
+    <Route path="mydoing.html" component={MyDoing} />
 
     <Route path="*" component={NotFoundPage} />
   </Route>
