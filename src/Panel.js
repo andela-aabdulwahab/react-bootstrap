@@ -48,6 +48,7 @@ class Panel extends React.Component {
 
   handleClickTitle(e) {
     // FIXME: What the heck? This API is horrible. This needs to go away!
+    // TODO: Find out what ReactSynthentic events are. and If persist is needed
     e.persist();
     e.selected = true;
 
@@ -57,11 +58,15 @@ class Panel extends React.Component {
       e.preventDefault();
     }
 
+    /* this is important as you might want to prevent the panel to expand on
+      click of certain header object. Check the tests in PanelGroupSpec for eg
+      so changeing selected to false will prevent expansion.
+    */
     if (e.selected) {
       this.setState({ expanded: !this.state.expanded });
     }
   }
-
+  // TODO: Use this function in renderbody
   shouldRenderFill(child) {
     return React.isValidElement(child) && child.props.fill != null;
   }
@@ -149,7 +154,15 @@ class Panel extends React.Component {
 
     // Convert to array so we can re-use keys.
     React.Children.toArray(rawChildren).forEach(child => {
+      /*
+        This prevent the wrapping of children with fill props with a div that add
+        the class name div.
+      */
       if (React.isValidElement(child) && child.props.fill) {
+        /*
+          calling maybeAddBody allow all child before a fill child to be stack
+          together in a single div with class panel-body.
+        */
         maybeAddBody();
 
         // Remove the child's unknown `fill` prop.
