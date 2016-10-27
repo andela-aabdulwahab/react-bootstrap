@@ -35,6 +35,13 @@ class Form extends React.Component {
     if (inline) {
       classes.push(prefix(bsProps, 'inline'));
     }
+    // TODO: Propose UI cleaning as below
+    /*
+    const classes = {
+      [prefix(bsProps, 'horizontal')]: horizontal,
+      [prefix(bsProps, 'inline')]: inline
+    };
+    */
 
     return (
       <Component

@@ -9,15 +9,11 @@ class FormExample extends Component {
 
     this.state = {
       facebook_id: '',
-      facebook_email : '',
+      facebook_email: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit(event) {
-    //
   }
 
   handleChange(event) {
@@ -60,13 +56,13 @@ class FormExample extends Component {
 
 class MyDoing extends Component {
   render() {
-    return(
+    return (
       <Grid>
         <Row className="show-grid" >
           <FormExample />
         </Row>
       </Grid>
-    )
+    );
   }
 }
 
