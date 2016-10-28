@@ -35,11 +35,11 @@ class FormControl extends React.Component {
     const {
       componentClass: Component,
       type,
+      // controlId is the default incase id is not specified
       id = controlId,
       className,
       ...props
     } = this.props;
-
     const [bsProps, elementProps] = splitBsProps(props);
 
     warning(
