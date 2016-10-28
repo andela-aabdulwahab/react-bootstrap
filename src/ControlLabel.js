@@ -25,6 +25,7 @@ class ControlLabel extends React.Component {
     const formGroup = this.context.$bs_formGroup;
     const controlId = formGroup && formGroup.controlId;
 
+    // since for is a resevered Keyword in Js, React Component uses htmlFor
     const { htmlFor = controlId, srOnly, className, ...props } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 

@@ -48,7 +48,7 @@ class FormControlFeedback extends React.Component {
         this.context.$bs_formGroup, className, classes, elementProps
       );
     }
-
+    // React.Children.only returns only the child in children or Throws otherwise
     const child = React.Children.only(children);
     return React.cloneElement(child, {
       ...elementProps,
