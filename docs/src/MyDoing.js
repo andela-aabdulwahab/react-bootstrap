@@ -1,64 +1,58 @@
 import React, { Component } from 'react';
 import { Form, FormControl, ControlLabel, FormGroup, HelpBlock, Grid, Row } from '../../src/index';
+import { NavDropdown, Nav, MenuItem } from '../../src/index';
 
 
-class FormExample extends Component {
-
+class MyNavDropdown extends React.Component {
   constructor(props) {
-    super(props);
+      super(props);
+      this.state = {
+        isHovering: false
+      };
+    }
 
-    this.state = {
-      facebook_id: '',
-      facebook_email: '',
+    render() {
+
+    const onMouseOver = () => {
+      console.log('onMouseOver fired');
+      this.setState({ isHovering: true });
     };
 
-    this.handleChange = this.handleChange.bind(this);
-  }
+    const onMouseLeave = () => {
+      console.log('onMouseLeave fired');
+      this.setState({ isHovering: false });
+    };
 
-  handleChange(event) {
-    // const newSearch = Object.assign({}, this.state.search, { [event.target.id]: event.target.value});
-    this.setState({
-      [event.target.id]: event.target.value
-    });
-  }
+    const dropDownClasses = this.state.isHovering ? 'open nav-links' : 'nav-links';
 
-  render() {
     return (
-      <Form horizontal onSubmit={this.handleSubmit}>
-        <FormGroup
-          controlId="facebook_id">
-          <ControlLabel>Working example with validation</ControlLabel>
-          <FormControl
-            type="text"
-            value={this.state.facebook_id}
-            placeholder="Enter text"
-            onChange={this.handleChange} />
-          <FormControl.Feedback />
-          <HelpBlock>{this.state.facebook_id}</HelpBlock>
-        </FormGroup>
-
-        <FormGroup
-          controlId="facebook_email">
-          <ControlLabel>Working example with validation</ControlLabel>
-          <FormControl
-            type="text"
-            value={this.state.facebook_email}
-            placeholder="Enter text"
-            onChange={this.handleChange} />
-          <FormControl.Feedback />
-          <HelpBlock>{this.state.facebook_email}</HelpBlock>
-        </FormGroup>
-      </Form>
+      <NavDropdown
+        className={dropDownClasses}
+        onMouseEnter={onMouseOver}
+        onMouseLeave={onMouseLeave}
+        ref="myDropdown"
+        eventKey="4"
+        title={this.props.title}
+        id="nav-dropdown"
+        noCaret={true}>
+          <MenuItem className="dropdownMenuItem" eventKey="4.2">Sponsors</MenuItem>
+      </NavDropdown>
     );
   }
-}
+};
+
+const OpportunitiesLinks = () => (
+  <MenuItem className="dropdownMenuItem" eventKey="4.2">Sponsors</MenuItem>
+);
 
 class MyDoing extends Component {
   render() {
     return (
       <Grid>
         <Row className="show-grid" >
-          <FormExample />
+          <Nav pullRight>
+            <MyNavDropdown title="Opportunities" />
+          </Nav>
         </Row>
       </Grid>
     );
